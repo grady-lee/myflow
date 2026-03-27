@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <style>
+        #error-box{
+            width: 200px;
+            min-height: 20px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            color: red;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="header">
+            <p>书城</p>
+        </div>
+        <div id="content">
+            <div id="login_form">
+                <div id="login_box">
+                    <div id="error-box">
+                        {{errorMsg}}
+                    </div>
+                    <div id="form">
+                        <form ref="loginForm" action="/webtest01/login" method="post" @submit.prevent="login">
+                            <label for="username">用户名:</label>
+                            <input type="text"
+                                   name="username"
+                                   id="username"
+                                   autocomplete="off"
+                                   placeholder="请输入用户名"
+                                   v-model="username"><br/>
+                            <label for="password">密码:</label>
+                            <input type="password"
+                                   name="rawPassword"
+                                   id="password"
+                                   autocomplete="off"
+                                   placeholder="请输入密码"
+                                   v-model="password"><br/>
+                            <input type="submit" value="登录" :disabled="submitting"/>
+                        </form>
+                        <div id="register">
+                            <a href="pages/register.html">立即注册</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            &copy;2010-2026年
+        </div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                username: '',
+                password: '',
+                errorMsg: '',
+                submitting: false
+            },
+            methods: {
+                login: function(){
+                    // 每次清空
+                    this.errorMsg = '';
+                    if(!this.username.trim()){
+                        this.errorMsg = "用户名不能为空";
+                        // 已经通过@submit.prevent阻止默认提交
+                        // ev.preventDefault();
+                        return;
+                    }
+                    if(!this.password.trim()){
+                        this.errorMsg = "密码不能为空";
+                        // ev.preventDefault();
+                        return;
+                    }
+                    this.submitting = true;
+                    // this.$el.querySelector("form").submit();
+                    // 多个form表单时区分匹配
+                   /* setTimeout(() => {  // 演示避免重复提交效果
+                        this.$refs.loginForm.submit();
+                    },2000);*/
+                    this.$refs.loginForm.submit();
+                }
+            },
+            watch: {}
+        });
+    </script>
+</body>
+</html>
