@@ -1,0 +1,16 @@
+# 忽略所有的 .log 文件
+*.log
+
+# 忽略 node_modules 文件夹
+node_modules/
+
+# 忽略具体的配置文件
+config.ini
+
+# 但不忽略特定的文件 (使用感叹号)
+!important.log
+
+# 忽略 build 目录下所有的内容，但保留 build 文件夹本身
+build/*
+
+.idea/
