@@ -14,4 +14,4 @@ config.ini
 build/*
 
 .idea/
-.out/
+out/
